@@ -23,9 +23,9 @@
        mouse into it, also raise the window -->
   </focus>
   <placement>
-      <!-- 'Smart' or 'UnderMouse' -->
-      <policy>Smart</policy>
-    <center>no</center>
+    <!-- 'Smart' or 'UnderMouse' -->
+    <policy>Smart</policy>
+    <center>yes</center>
     <!-- whether to place windows in the center of the free area found or
        the top left corner -->
     <monitor>Active</monitor>
@@ -38,11 +38,10 @@
        from 1, specifying a particular monitor.  Or it can be one of the
        following: 'Mouse' - where the mouse is, or
                   'Active' - where the active window is -->
-    <policy>Smart</policy>
   </placement>
   <theme>
-    <name>Numix</name>
-    <titleLayout>LC</titleLayout>
+    <name>opentheme</name>
+    <titleLayout>L</titleLayout>
     <!--
       oldLayout = NLIMC
       available characters are NDSLIMC, each can occur at most once.
@@ -123,10 +122,10 @@
     <number>4</number>
     <firstdesk>1</firstdesk>
     <names>
-      <!-- set names up here if you want to, like this:
-    <name>desktop 1</name>
-    <name>desktop 2</name>
-    -->
+        <name>Internet</name>
+        <name>Code</name>
+        <name>Etc.</name>
+        <name>Communication</name>
     </names>
     <popupTime>875</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
@@ -159,7 +158,7 @@
     <right>10</right>
   </margins>
   <dock>
-    <position>Bottom</position>
+    <position>Top</position>
     <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
     <floatingX>0</floatingX>
     <floatingY>0</floatingY>
@@ -178,6 +177,25 @@
   </dock>
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
+    <keybind key="W-F8">
+        <action name="ToggleAlwaysOnTop"/>
+    </keybind>
+
+    <keybind key="A-space">
+      <action name="Execute">
+        <command>albert toggle</command>
+      </action>
+    </keybind>
+    <keybind key="W-p">
+      <action name="Execute">
+        <command>/home/mathias/bin/pauseconky</command>
+      </action>
+    </keybind>
+    <keybind key="W-u">
+      <action name="Execute">
+        <command>/home/mathias/bin/unpauseconky</command>
+      </action>
+    </keybind>
     <!-- Keybindings for desktop switching -->
     <keybind key="C-A-Left">
       <action name="GoToDesktop">
@@ -194,13 +212,13 @@
     <keybind key="C-A-Up">
       <action name="GoToDesktop">
         <to>up</to>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="C-A-Down">
       <action name="GoToDesktop">
         <to>down</to>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="C-A-S-Left">
@@ -288,31 +306,34 @@
       <action name="Unfocus"/>
     </keybind>
     <!-- Take a screenshot of the current window with scrot when Alt+Print are pressed -->
-    <keybind key="A-Print">
+    <keybind key="Print">
       <action name="Execute">
-        <command>scrot -s</command>
+        <command>scrot -s /home/mathias/Pictures/%s.png -e 'xclip $f -t image/png -selection clipboard'</command>
       </action>
     </keybind>
     <keybind key="C-A-t">
       <action name="Execute">
+        <startupnotify>
+          <enabled>yes</enabled>
+        </startupnotify>
         <command>gnome-terminal</command>
       </action>
-  </keybind>
-	<keybind key="XF86AudioRaiseVolume">
-     <action name="Execute"> 
-         <command>amixer -D pulse sset Master 10%+</command>
-     </action>
-  </keybind>
-   <keybind key="XF86AudioLowerVolume">
-     <action name="Execute">
-       <command>amixer -D pulse sset Master 10%-</command>
-     </action>
-   </keybind>
-   <keybind key="XF86AudioMute">
-     <action name="Execute"> 
-       <command>amixer -D pulse sset Master toggle</command>
-     </action>
-  </keybind>
+    </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>amixer -D pulse sset Master 10%+</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>amixer -D pulse sset Master 10%-</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute">
+        <command>amixer -D pulse sset Master toggle</command>
+      </action>
+    </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
@@ -364,12 +385,6 @@
     <keybind key="W-S-Down">
       <action name="DirectionalCycleWindows">
         <direction>down</direction>
-      </action>
-    </keybind>
-    <!-- Launch scrot when Print is pressed -->
-    <keybind key="Print">
-      <action name="Execute">
-        <command>scrot</command>
       </action>
     </keybind>
   </keyboard>
@@ -746,11 +761,15 @@
                       (if unspecified, then it is 'dialog' for child windows)">
     -->
     <application class="*">
-        <decor>no</decor>
+      <decor>no</decor>
+    </application>
+    <application class="Thunderbird">
+      <desktop>4</desktop>
+      <maximized>yes</maximized>
     </application>
     <application name="slack">
-        <desktop>4</desktop>
-        <maximized>yes</maximized>
+      <desktop>4</desktop>
+      <maximized>yes</maximized>
     </application>
   </applications>
 </openbox_config>
